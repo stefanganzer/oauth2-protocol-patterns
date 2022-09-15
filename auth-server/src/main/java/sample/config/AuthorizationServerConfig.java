@@ -22,6 +22,7 @@ import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import org.springframework.security.oauth2.server.authorization.config.ClientSettings;
 import sample.jose.Jwks;
 
 import org.springframework.context.annotation.Bean;
@@ -48,7 +49,7 @@ public class AuthorizationServerConfig {
     RegisteredClientRepository registeredClientRepository() {
         RegisteredClient loginClient = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("login-client")
-                .clientSecret("secret")
+                .clientSecret("secret-login-client")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .redirectUri("http://localhost:8080/login/oauth2/code/login-client")
@@ -57,30 +58,30 @@ public class AuthorizationServerConfig {
 
         RegisteredClient clientA = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("client-a")
-                .clientSecret("secret")
+                .clientSecret("secret-a")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                 .redirectUri("http://localhost:8080/flow-a")
                 .scope("authority-a")
-                .clientSettings(clientSettings -> clientSettings.requireUserConsent(true))
+                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
                 .build();
 
         RegisteredClient clientAB = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("client-ab")
-                .clientSecret("secret")
+                .clientSecret("secret-ab")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                 .redirectUri("http://localhost:8080/flow-ab")
                 .scope("authority-a")
                 .scope("authority-b")
-                .clientSettings(clientSettings -> clientSettings.requireUserConsent(true))
+                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
                 .build();
 
         RegisteredClient clientABC = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("client-abc")
-                .clientSecret("secret")
+                .clientSecret("secret-abc")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
@@ -88,12 +89,12 @@ public class AuthorizationServerConfig {
                 .scope("authority-a")
                 .scope("authority-b")
                 .scope("authority-c")
-                .clientSettings(clientSettings -> clientSettings.requireUserConsent(true))
+                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
                 .build();
 
         RegisteredClient clientC = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("client-c")
-                .clientSecret("secret")
+                .clientSecret("secret-c")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
                 .scope("authority-c")
@@ -118,7 +119,7 @@ public class AuthorizationServerConfig {
 
     @Bean
     ProviderSettings providerSettings() {
-        return new ProviderSettings().issuer("http://auth-server:9000");
+        return ProviderSettings.builder().issuer("http://auth-server:9000").build();
     }
 
 }
