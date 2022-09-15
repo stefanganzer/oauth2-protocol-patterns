@@ -48,7 +48,7 @@ public class AuthorizationServerConfig {
     RegisteredClientRepository registeredClientRepository() {
         RegisteredClient loginClient = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("login-client")
-                .clientSecret("secret-login-client")
+                .clientSecret("{noop}secret-login-client")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .redirectUri("http://127.0.0.1:8080/login/oauth2/code/login-client")
@@ -57,7 +57,7 @@ public class AuthorizationServerConfig {
 
         RegisteredClient clientA = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("client-a")
-                .clientSecret("secret-a")
+                .clientSecret("{noop}secret-a")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
@@ -68,7 +68,7 @@ public class AuthorizationServerConfig {
 
         RegisteredClient clientAB = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("client-ab")
-                .clientSecret("secret-ab")
+                .clientSecret("{noop}secret-ab")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
@@ -80,7 +80,7 @@ public class AuthorizationServerConfig {
 
         RegisteredClient clientABC = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("client-abc")
-                .clientSecret("secret-abc")
+                .clientSecret("{noop}secret-abc")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
@@ -93,7 +93,7 @@ public class AuthorizationServerConfig {
 
         RegisteredClient clientC = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("client-c")
-                .clientSecret("secret-c")
+                .clientSecret("{noop}secret-c")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
                 .scope("authority-c")
