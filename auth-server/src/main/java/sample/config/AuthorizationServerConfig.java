@@ -41,7 +41,6 @@ import org.springframework.security.oauth2.server.authorization.config.ProviderS
  * @author Joe Grandja
  */
 @Configuration(proxyBeanMethods = false)
-@Import(OAuth2AuthorizationServerConfiguration.class)
 public class AuthorizationServerConfig {
 
     // @formatter:off
@@ -52,7 +51,7 @@ public class AuthorizationServerConfig {
                 .clientSecret("secret-login-client")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .redirectUri("http://localhost:8080/login/oauth2/code/login-client")
+                .redirectUri("http://127.0.0.1:8080/login/oauth2/code/login-client")
                 .scope(OidcScopes.OPENID)
                 .build();
 
@@ -62,7 +61,7 @@ public class AuthorizationServerConfig {
                 .clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-                .redirectUri("http://localhost:8080/flow-a")
+                .redirectUri("http://127.0.0.1:8080/flow-a")
                 .scope("authority-a")
                 .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
                 .build();
@@ -73,7 +72,7 @@ public class AuthorizationServerConfig {
                 .clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-                .redirectUri("http://localhost:8080/flow-ab")
+                .redirectUri("http://127.0.0.1:8080/flow-ab")
                 .scope("authority-a")
                 .scope("authority-b")
                 .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
@@ -85,7 +84,7 @@ public class AuthorizationServerConfig {
                 .clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-                .redirectUri("http://localhost:8080/flow-abc")
+                .redirectUri("http://127.0.0.1:8080/flow-abc")
                 .scope("authority-a")
                 .scope("authority-b")
                 .scope("authority-c")
